@@ -15,6 +15,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     private static final String COL_NAME = "name";
     private static final String COL_EMAIL = "email";
     private static final String COL_PHONE = "phone";
+    private static final String COL_ADDRESS = "address";
+    private static final String COL_PASSWORD = "password";
     private static final String COL_IS_ACTIVE = "is_active";
 
     public SQLiteHelper(Context context) {
@@ -28,6 +30,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 + COL_NAME + " TEXT, "
                 + COL_EMAIL + " TEXT, "
                 + COL_PHONE + " TEXT, "
+                + COL_ADDRESS + " TEXT, "
+                + COL_PASSWORD + " TEXT, "
                 + COL_IS_ACTIVE + " INTEGER DEFAULT 1)";
         db.execSQL(createTable);
     }
@@ -46,6 +50,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         values.put(COL_NAME, owner.getName());
         values.put(COL_EMAIL, owner.getEmail());
         values.put(COL_PHONE, owner.getPhone());
+        values.put(COL_ADDRESS, owner.getAddress());
+        values.put(COL_PASSWORD, owner.getPassword());
         values.put(COL_IS_ACTIVE, owner.isActive() ? 1 : 0);
         db.insert(TABLE_EV_OWNERS, null, values);
         db.close();
@@ -58,6 +64,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         values.put(COL_NAME, owner.getName());
         values.put(COL_EMAIL, owner.getEmail());
         values.put(COL_PHONE, owner.getPhone());
+        values.put(COL_ADDRESS, owner.getAddress());
+        values.put(COL_PASSWORD, owner.getPassword());
         values.put(COL_IS_ACTIVE, owner.isActive() ? 1 : 0);
         db.update(TABLE_EV_OWNERS, values, COL_NIC + " = ?", new String[]{owner.getNic()});
         db.close();
@@ -82,6 +90,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
             owner.setName(cursor.getString(cursor.getColumnIndexOrThrow(COL_NAME)));
             owner.setEmail(cursor.getString(cursor.getColumnIndexOrThrow(COL_EMAIL)));
             owner.setPhone(cursor.getString(cursor.getColumnIndexOrThrow(COL_PHONE)));
+            owner.setAddress(cursor.getString(cursor.getColumnIndexOrThrow(COL_ADDRESS)));
+            owner.setPassword(cursor.getString(cursor.getColumnIndexOrThrow(COL_PASSWORD)));
             owner.setActive(cursor.getInt(cursor.getColumnIndexOrThrow(COL_IS_ACTIVE)) == 1);
             cursor.close();
             db.close();

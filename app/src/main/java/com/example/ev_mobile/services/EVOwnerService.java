@@ -40,11 +40,14 @@ public class EVOwnerService {
                 conn.setRequestMethod(method);
                 conn.setRequestProperty("Content-Type", "application/json");
                 conn.setRequestProperty("Accept", "application/json");
-                String token = getToken(); // From SharedPreferences
-                if (token != null) {
+
+                // Optional token
+                String token = getToken();
+                if (token != null && !endpoint.equals("/EVOwners")) {
                     conn.setRequestProperty("Authorization", "Bearer " + token);
                 }
 
+                // Send body if exists
                 if (body != null) {
                     conn.setDoOutput(true);
                     OutputStream os = conn.getOutputStream();
@@ -54,32 +57,45 @@ public class EVOwnerService {
                 }
 
                 int responseCode = conn.getResponseCode();
-                if (responseCode == HttpURLConnection.HTTP_OK) {
-                    BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                    StringBuilder response = new StringBuilder();
-                    String line;
-                    while ((line = br.readLine()) != null) {
-                        response.append(line);
-                    }
-                    br.close();
-                    handler.post(() -> callback.onSuccess(response.toString()));
-                    Log.d("ApiService", "Response Code: " + responseCode);
-                    Log.d("ApiService", "Full Response: " + response.toString());
+                BufferedReader br;
+                if (responseCode >= 200 && responseCode < 300) {
+                    br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
                 } else {
-                    handler.post(() -> callback.onFailure("Error: " + responseCode));
+                    br = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+                }
+
+                StringBuilder response = new StringBuilder();
+                String line;
+                while ((line = br.readLine()) != null) {
+                    response.append(line);
+                }
+                br.close();
+
+                if (responseCode >= 200 && responseCode < 300) {
+                    String result = response.toString();
+                    handler.post(() -> callback.onSuccess(result));
+                    Log.d("ApiService", "✅ Success: " + result);
+                } else {
+                    String errorMsg = "Error " + responseCode + ": " + response.toString();
+                    handler.post(() -> callback.onFailure(errorMsg));
+                    Log.e("ApiService", "❌ Failure: " + errorMsg);
                 }
 
             } catch (Exception e) {
-                handler.post(() -> callback.onFailure(e.getMessage()));
+                handler.post(() -> callback.onFailure("Exception: " + e.getMessage()));
+                Log.e("ApiService", "Exception", e);
             }
         });
     }
 
+
+
     // EV Owner Login (get JWT)
-    public void loginEVOwner(String nic, ApiCallback callback) {
+    public void loginEVOwner(String nic, String password, ApiCallback callback) {
         JSONObject body = new JSONObject();
         try {
             body.put("NIC", nic);
+            body.put("Password", password);
         } catch (Exception e) {}
         makeRequest("/auth/evowner-login", "POST", body, callback);
     }
@@ -93,6 +109,22 @@ public class EVOwnerService {
         } catch (Exception e) {}
         makeRequest("/auth/login", "POST", body, callback);
     }
+
+    public void registerEVOwner(EVOwner owner, ApiCallback callback) {
+        JSONObject body = new JSONObject();
+        try {
+            body.put("NIC", owner.getNic());
+            body.put("Name", owner.getName());
+            body.put("Email", owner.getEmail());
+            body.put("Phone", owner.getPhone());
+            body.put("Address", owner.getAddress());
+            body.put("Password", owner.getPassword());
+            body.put("IsActive", owner.isActive());
+        } catch (Exception e) {}
+        makeRequest("/EVOwners", "POST", body, callback);
+
+    }
+
 
     // Get Profile
     public void getProfile(ApiCallback callback) {

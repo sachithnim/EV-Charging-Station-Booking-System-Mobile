@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_gradient"
+    android:fillViewport="true"
+    tools:context=".activities.RegisterActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="24dp">
+
+        <!-- Header with Logo -->
+        <LinearLayout
+            android:id="@+id/header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="32dp">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/charge"
+                android:contentDescription="@string/app_name"
+                android:layout_marginBottom="12dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Create Account"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Join EV Charge Pro Today"
+                android:textSize="14sp"
+                android:textColor="@color/white_alpha_80"
+                android:layout_marginTop="4dp" />
+        </LinearLayout>
+
+        <!-- Registration Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/register_card"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="8dp"
+            app:cardBackgroundColor="@android:color/white"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/header"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="24dp">
+
+                <!-- Role Selection -->
+
+
+                <!-- NIC Input -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/nic_input_layout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="NIC Number"
+                    app:startIconDrawable="@drawable/outline_account_circle_24"
+                    app:boxCornerRadiusBottomStart="12dp"
+                    app:hintTextColor="@color/text_secondary"
+                    app:boxCornerRadiusBottomEnd="12dp"
+                    app:boxCornerRadiusTopStart="12dp"
+                    app:boxCornerRadiusTopEnd="12dp"
+                    app:boxStrokeColor="@color/primary"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginBottom="16dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_nic"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:padding="16dp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Full Name Input -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/name_input_layout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Full Name"
+                    app:startIconDrawable="@drawable/outline_account_box_24"
+                    app:boxCornerRadiusBottomStart="12dp"
+                    app:boxCornerRadiusBottomEnd="12dp"
+                    app:hintTextColor="@color/text_secondary"
+                    app:boxCornerRadiusTopStart="12dp"
+                    app:boxCornerRadiusTopEnd="12dp"
+                    app:boxStrokeColor="@color/primary"
+                    app:layout_constraintTop_toBottomOf="@id/nic_input_layout"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginBottom="16dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:inputType="textPersonName"
+                        android:maxLines="1"
+                        android:padding="16dp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Email Input -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/email_input_layout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Email Address"
+                    app:hintTextColor="@color/text_secondary"
+                    app:startIconDrawable="@drawable/outline_attach_email_24"
+                    app:boxCornerRadiusBottomStart="12dp"
+                    app:boxCornerRadiusBottomEnd="12dp"
+                    app:boxCornerRadiusTopStart="12dp"
+                    app:boxCornerRadiusTopEnd="12dp"
+                    app:boxStrokeColor="@color/primary"
+                    app:layout_constraintTop_toBottomOf="@id/name_input_layout"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginBottom="16dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:inputType="textEmailAddress"
+                        android:maxLines="1"
+                        android:padding="16dp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Phone Input -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/phone_input_layout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Phone Number"
+                    app:startIconDrawable="@drawable/outline_call_24"
+                    app:boxCornerRadiusBottomStart="12dp"
+                    app:boxCornerRadiusBottomEnd="12dp"
+                    app:boxCornerRadiusTopStart="12dp"
+                    app:hintTextColor="@color/text_secondary"
+                    app:boxCornerRadiusTopEnd="12dp"
+                    app:boxStrokeColor="@color/primary"
+                    app:layout_constraintTop_toBottomOf="@id/email_input_layout"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginBottom="16dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:inputType="phone"
+                        android:maxLines="1"
+                        android:padding="16dp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Address Input -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/address_input_layout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Address"
+                    app:startIconDrawable="@drawable/outline_add_location_alt_24"
+                    app:boxCornerRadiusBottomStart="12dp"
+                    app:boxCornerRadiusBottomEnd="12dp"
+                    app:boxCornerRadiusTopStart="12dp"
+                    app:boxCornerRadiusTopEnd="12dp"
+                    app:hintTextColor="@color/text_secondary"
+                    app:boxStrokeColor="@color/primary"
+                    app:layout_constraintTop_toBottomOf="@id/phone_input_layout"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginBottom="16dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:inputType="textPostalAddress"
+                        android:maxLines="2"
+                        android:padding="16dp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Password Input -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/password_input_layout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Password"
+                    app:startIconDrawable="@drawable/baseline_lock_24"
+                    app:endIconMode="password_toggle"
+                    app:boxCornerRadiusBottomStart="12dp"
+                    app:boxCornerRadiusBottomEnd="12dp"
+                    app:boxCornerRadiusTopStart="12dp"
+                    app:boxCornerRadiusTopEnd="12dp"
+                    app:hintTextColor="@color/text_secondary"
+                    app:boxStrokeColor="@color/primary"
+                    app:layout_constraintTop_toBottomOf="@id/address_input_layout"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginBottom="8dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:inputType="textPassword"
+                        android:maxLines="1"
+                        android:padding="16dp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Confirm Password Input -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/confirm_password_input_layout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Confirm Password"
+                    app:startIconDrawable="@drawable/baseline_lock_24"
+                    app:endIconMode="password_toggle"
+                    app:hintTextColor="@color/text_secondary"
+                    app:boxCornerRadiusBottomStart="12dp"
+                    app:boxCornerRadiusBottomEnd="12dp"
+                    app:boxCornerRadiusTopStart="12dp"
+                    app:boxCornerRadiusTopEnd="12dp"
+                    app:boxStrokeColor="@color/primary"
+                    app:layout_constraintTop_toBottomOf="@id/password_input_layout"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginBottom="24dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_confirm_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:inputType="textPassword"
+                        android:maxLines="1"
+                        android:padding="16dp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Terms and Conditions -->
+                <CheckBox
+                    android:id="@+id/cb_terms"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="I agree to the Terms &amp; Conditions"
+                    android:textSize="12sp"
+                    android:buttonTint="@color/primary"
+                    android:textColor="@color/text_secondary"
+                    app:layout_constraintTop_toBottomOf="@id/confirm_password_input_layout"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginBottom="24dp" />
+
+                <!-- Register Button -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_submit_register"
+                    android:layout_width="0dp"
+                    android:layout_height="56dp"
+                    android:text="Create Account"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:iconGravity="textStart"
+                    app:cornerRadius="12dp"
+                    android:backgroundTint="@color/primary"
+                    app:layout_constraintTop_toBottomOf="@id/cb_terms"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginBottom="16dp" />
+
+                <!-- Divider -->
+                <View
+                    android:id="@+id/divider"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="@color/white"
+                    app:layout_constraintTop_toBottomOf="@id/btn_submit_register"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="16dp" />
+
+                <!-- Login Section -->
+                <TextView
+                    android:id="@+id/tv_have_account"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Already have an account?"
+                    android:textSize="14sp"
+                    android:textColor="@color/text_secondary"
+                    app:layout_constraintTop_toBottomOf="@id/divider"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/btn_login"
+                    android:layout_marginEnd="8dp" />
+
+                <TextView
+                    android:id="@+id/btn_login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sign In"
+                    android:textSize="14sp"
+                    android:textColor="@color/primary"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toBottomOf="@id/divider"
+                    app:layout_constraintStart_toEndOf="@id/tv_have_account"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Footer -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="© 2025 EV Charge Pro. All rights reserved."
+            android:textSize="12sp"
+            android:textColor="@color/white_alpha_60"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="24dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
