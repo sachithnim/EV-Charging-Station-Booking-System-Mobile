@@ -128,7 +128,7 @@ public class LoginActivity extends AppCompatActivity {
                         }
                         if (!token.isEmpty()) {
                             apiService.saveToken(token);
-                            startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
+                            startActivity(new Intent(LoginActivity.this, StationOperatorDashboardActivity.class));
                             finish();  // Optional: Close login activity
                         } else {
                             Toast.makeText(LoginActivity.this, "Invalid response: No token found", Toast.LENGTH_SHORT).show();
