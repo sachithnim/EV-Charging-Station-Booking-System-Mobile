@@ -1,0 +1,133 @@
+# =========================
+# Android Studio / Gradle
+# =========================
+.gradle/
+build/
+**/build/
+!gradle/wrapper/gradle-wrapper.jar
+local.properties
+.gradle/
+.gradle-cache/
+.gradle/configurations/
+
+# =========================
+# IntelliJ / Android Studio
+# =========================
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+.idea/caches/
+.idea/libraries/
+.idea/modules.xml
+.idea/workspace.xml
+.idea/navEditor.xml
+.idea/assetWizardSettings.xml
+.idea/misc.xml
+
+# =========================
+# Keystore files
+# =========================
+*.jks
+*.keystore
+
+# =========================
+# Android
+# =========================
+# Generated files
+bin/
+gen/
+out/
+obj/
+captures/
+.externalNativeBuild/
+.cxx/
+navigation.json
+
+# =========================
+# Signing / Credentials
+# =========================
+signing.properties
+key.properties
+*.pem
+*.p12
+*.key
+*.crt
+
+# =========================
+# Gradle Wrapper
+# =========================
+gradle-app.setting
+.gradle/
+gradlew
+gradlew.bat
+
+# =========================
+# Log / Temp Files
+# =========================
+*.log
+*.tmp
+*.temp
+*.orig
+*.bak
+*.swp
+*.swo
+*.DS_Store
+*.class
+
+# =========================
+# Android Specific
+# =========================
+# Local configuration file (sdk path, etc)
+local.properties
+
+# Proguard
+proguard/
+proguard-rules.pro
+
+# NDK
+obj/
+
+# =========================
+# Miscellaneous
+# =========================
+.idea/
+.vscode/
+*.apk
+*.aab
+*.ap_
+*.dex
+*.class
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# =========================
+# Google Services
+# =========================
+google-services.json
+GoogleService-Info.plist
+
+# =========================
+# Firebase / Crashlytics
+# =========================
+crashlytics-build.properties
+fabric.properties
+
+# =========================
+# Fastlane
+# =========================
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+fastlane/test_output
+fastlane/readme.md
+
+# =========================
+# Android Profiler
+# =========================
+*.hprof
