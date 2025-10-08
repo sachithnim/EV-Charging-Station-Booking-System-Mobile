@@ -1,0 +1,30 @@
+# Ignore Gradle build cache and outputs
+.gradle/
+build/
+**/build/
+
+# Ignore local SDK and environment configs
+local.properties
+
+# Ignore Android Studio / IntelliJ project files
+.idea/
+*.iml
+
+# Ignore logs and temp files
+*.log
+*.tmp
+*.temp
+
+# Ignore generated binaries and packaged files
+*.apk
+*.aab
+*.dex
+*.class
+
+# Ignore keystore or signing info (security)
+*.jks
+*.keystore
+
+# Ignore OS junk
+.DS_Store
+Thumbs.db
