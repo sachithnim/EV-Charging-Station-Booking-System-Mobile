@@ -26,9 +26,9 @@
             android:layout_marginBottom="32dp">
 
             <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:src="@drawable/charge"
+                android:layout_width="140dp"
+                android:layout_height="60dp"
+                android:src="@drawable/logo"
                 android:contentDescription="@string/app_name"
                 android:layout_marginBottom="12dp" />
 
