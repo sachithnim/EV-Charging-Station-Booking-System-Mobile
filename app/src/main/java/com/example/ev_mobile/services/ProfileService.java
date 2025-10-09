@@ -92,6 +92,10 @@ public class ProfileService {
         makeRequest("/EVOwners/"+nic+"/deactivate", "POST", null, callback);
     }
 
+    public void changePassword(String nic, JSONObject updatedData, ApiCallback callback) {
+        makeRequest("/EVOwners/" + nic + "/change-password", "POST", updatedData, callback);
+    }
+
     public interface ApiCallback<T> {
         void onSuccess(T result);
         void onFailure(String error);

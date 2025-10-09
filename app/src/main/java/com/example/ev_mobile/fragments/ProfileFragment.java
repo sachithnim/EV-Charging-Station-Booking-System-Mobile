@@ -1,7 +1,11 @@
 package com.example.ev_mobile.fragments;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -45,6 +49,9 @@ public class ProfileFragment extends Fragment {
 
         // Deactivate button
         binding.btnDeactivate.setOnClickListener(v -> deactivateAccount());
+
+        // Change password button
+        binding.btnChangePassword.setOnClickListener(v -> showChangePasswordDialog());
 
         // Logout button
         binding.btnLogout.setOnClickListener(v -> {
@@ -110,7 +117,7 @@ public class ProfileFragment extends Fragment {
     }
 
     private void deactivateAccount() {
-        profileService.deactivateAccount(nicIdentifier,new ProfileService.ApiCallback<String>() {
+        profileService.deactivateAccount(nicIdentifier, new ProfileService.ApiCallback<String>() {
             @Override
             public void onSuccess(String result) {
                 Toast.makeText(requireContext(), "Account deactivated successfully", Toast.LENGTH_SHORT).show();
@@ -126,6 +133,94 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onFailure(String error) {
                 Toast.makeText(requireContext(), error, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void showChangePasswordDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setTitle("Change Password");
+
+        // Create input fields container
+        LinearLayout layout = new LinearLayout(requireContext());
+        layout.setOrientation(LinearLayout.VERTICAL);
+        int padding = (int) (16 * requireContext().getResources().getDisplayMetrics().density);
+        layout.setPadding(padding, padding, padding, padding);
+
+        // Old password
+        final EditText oldPasswordInput = new EditText(requireContext());
+        oldPasswordInput.setHint("Current Password");
+        oldPasswordInput.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        layout.addView(oldPasswordInput);
+
+        // New password
+        final EditText newPasswordInput = new EditText(requireContext());
+        newPasswordInput.setHint("New Password");
+        newPasswordInput.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        layout.addView(newPasswordInput);
+
+        // Confirm new password
+        final EditText confirmPasswordInput = new EditText(requireContext());
+        confirmPasswordInput.setHint("Confirm New Password");
+        confirmPasswordInput.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        layout.addView(confirmPasswordInput);
+
+        builder.setView(layout);
+
+        // We set a null listener here and override the button later so we can prevent dialog dismissal on invalid input
+        builder.setPositiveButton("Change", null);
+        builder.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+        // Override positive button to perform validation before dismissing
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(v -> {
+            String oldPass = oldPasswordInput.getText().toString().trim();
+            String newPass = newPasswordInput.getText().toString().trim();
+            String confirmPass = confirmPasswordInput.getText().toString().trim();
+
+            if (nicIdentifier == null || nicIdentifier.isEmpty()) {
+                Toast.makeText(requireContext(), "Profile not loaded yet.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            if (oldPass.isEmpty() || newPass.isEmpty() || confirmPass.isEmpty()) {
+                Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            if (!newPass.equals(confirmPass)) {
+                Toast.makeText(requireContext(), "New password and confirmation do not match", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            if (newPass.length() < 6) { // example minimum length rule
+                Toast.makeText(requireContext(), "New password must be at least 6 characters", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // Build JSON and call service
+            try {
+                JSONObject body = new JSONObject();
+                body.put("oldPassword", oldPass);
+                body.put("newPassword", newPass);
+
+                // Call change password endpoint
+                profileService.changePassword(nicIdentifier, body, new ProfileService.ApiCallback<String>() {
+                    @Override
+                    public void onSuccess(String result) {
+                        Toast.makeText(requireContext(), "Password changed successfully", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }
+
+                    @Override
+                    public void onFailure(String error) {
+                        Toast.makeText(requireContext(), error, Toast.LENGTH_SHORT).show();
+                    }
+                });
+            } catch (Exception e) {
+                Toast.makeText(requireContext(), "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

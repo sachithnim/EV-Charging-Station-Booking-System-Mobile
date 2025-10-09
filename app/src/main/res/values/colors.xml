@@ -22,6 +22,8 @@
 
     <color name="red">#FF0000</color>
     <color name="gray">#888888</color>
+    <color name="amber_700">#FFC107</color>
+
 
 
 </resources>
