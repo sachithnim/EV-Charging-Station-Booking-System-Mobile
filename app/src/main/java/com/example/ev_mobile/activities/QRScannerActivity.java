@@ -3,7 +3,9 @@ package com.example.ev_mobile.activities;
 import android.Manifest;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Size;
 import android.view.View;
@@ -133,8 +135,21 @@ public class QRScannerActivity extends AppCompatActivity {
                             String value = barcode.getRawValue();
                             if (value != null) {
                                 runOnUiThread(() -> {
-                                    showToast("Scanned: " + value);
-                                    finish();
+                                    try {
+                                        Uri uri = Uri.parse(value);
+                                        String path = uri.getPath(); // /booking/{id}
+                                        String[] segments = path.split("/");
+                                        String bookingId = segments[segments.length - 1];
+                                        String token = uri.getQueryParameter("token");
+
+                                        Intent intent = new Intent(QRScannerActivity.this, BookingDetailsActivity.class);
+                                        intent.putExtra("bookingId", bookingId);
+                                        intent.putExtra("token", token);
+                                        startActivity(intent);
+                                        finish();
+                                    } catch (Exception e) {
+                                        showToast("Invalid QR format");
+                                    }
                                 });
                                 break;
                             }

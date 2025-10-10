@@ -5,14 +5,93 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     tools:context=".activities.StationOperatorDashboardActivity">
 
-    <Button
-        android:id="@+id/qr_scan"
+    <!-- Header Title -->
+    <TextView
+        android:id="@+id/tv_dashboard_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="QR Scanner"
-        tools:layout_editor_absoluteX="170dp"
-        tools:layout_editor_absoluteY="227dp"
-        tools:ignore="MissingConstraints" />
+        android:text="Station Operator Dashboard"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="32dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- QR Scan Button with CardView for elevation and styling -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_qr_scan"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_dashboard_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <Button
+            android:id="@+id/qr_scan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Scan QR Code"
+            android:padding="16dp"
+            android:backgroundTint="#2196F3"
+            android:textColor="@android:color/white" />
+    </androidx.cardview.widget.CardView>
+
+    <!-- Placeholder for Stats or Other Features -->
+    <TextView
+        android:id="@+id/tv_stats_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Quick Stats"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginTop="32dp"
+        app:layout_constraintTop_toBottomOf="@id/card_qr_scan"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="2dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_stats_header"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Active Bookings: 5"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Stations Online: 3/4"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp" />
+
+            <!-- Add more stats as needed -->
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
